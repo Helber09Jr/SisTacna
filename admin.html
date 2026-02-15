@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - SisTacna</title>
+
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="Panel administrativo del restaurante">
+</head>
+<body>
+    <!-- HEADER NAVEGACION -->
+    <header class="encabezado">
+        <div class="contenedor-encabezado">
+            <a href="/" class="logo">
+                <span class="logo-texto">SisTacna Admin</span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="/" class="nav-enlace">Home</a>
+                <a href="/admin.html" class="nav-enlace activo">Admin</a>
+            </nav>
+
+            <div class="info-usuario">
+                <span id="usuarioActual" class="usuario-nombre">Admin</span>
+                <button class="btn-logout" id="btnLogout">🚪 Salir</button>
+            </div>
+
+            <button class="btn-hamburguesa" id="btnMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor-admin">
+        <!-- TABS DE NAVEGACION -->
+        <div class="tabs-admin">
+            <button class="tab-btn activo" data-tab="comandas">
+                📋 Comandas
+            </button>
+            <button class="tab-btn" data-tab="caja">
+                💰 Caja
+            </button>
+            <button class="tab-btn" data-tab="boletas">
+                📄 Boletas
+            </button>
+            <button class="tab-btn" data-tab="usuarios">
+                👥 Usuarios
+            </button>
+            <button class="tab-btn" data-tab="auditoria">
+                📊 Auditoria
+            </button>
+        </div>
+
+        <!-- TAB: COMANDAS -->
+        <section id="tab-comandas" class="tab-contenido activo">
+            <div class="seccion-titulo">
+                <h2>Gestión de Comandas</h2>
+                <span class="contador-comandas">Total: <strong id="totalComandas">0</strong></span>
+            </div>
+
+            <!-- FILTROS -->
+            <div class="filtros-comandas">
+                <select id="filtroEstado" class="select-filtro">
+                    <option value="">Todos los estados</option>
+                    <option value="pendiente">🕐 Pendiente</option>
+                    <option value="preparacion">👨‍🍳 En Preparación</option>
+                    <option value="listo">✅ Listo</option>
+                    <option value="entregado">🎉 Entregado</option>
+                </select>
+
+                <select id="filtroPago" class="select-filtro">
+                    <option value="">Todos los métodos</option>
+                    <option value="efectivo">💵 Efectivo</option>
+                    <option value="tarjeta">💳 Tarjeta</option>
+                    <option value="yape">📱 Yape</option>
+                </select>
+
+                <input type="text" id="buscarComanda" placeholder="Buscar por ID..." class="input-buscar">
+                <button id="btnRefreshComandas" class="btn btn-secundario">🔄 Actualizar</button>
+            </div>
+
+            <!-- LISTA DE COMANDAS -->
+            <div id="listaComandas" class="lista-comandas">
+                <!-- Renderizado por JS -->
+            </div>
+        </section>
+
+        <!-- TAB: CAJA -->
+        <section id="tab-caja" class="tab-contenido">
+            <div class="seccion-titulo">
+                <h2>Caja del Día</h2>
+                <span class="fecha-caja" id="fechaCaja">Hoy</span>
+            </div>
+
+            <!-- RESUMEN CAJA -->
+            <div class="resumen-caja">
+                <div class="tarjeta-resumen">
+                    <div class="titulo-resumen">Total Vendido</div>
+                    <div class="valor-resumen" id="totalVendido">S/. 0.00</div>
+                    <div class="contador-resumen" id="contadorVentas">0 pedidos</div>
+                </div>
+
+                <div class="tarjeta-resumen">
+                    <div class="titulo-resumen">IGV Acumulado</div>
+                    <div class="valor-resumen" id="totalIGV">S/. 0.00</div>
+                    <div class="contador-resumen">18%</div>
+                </div>
+
+                <div class="tarjeta-resumen">
+                    <div class="titulo-resumen">Subtotal</div>
+                    <div class="valor-resumen" id="totalSubtotal">S/. 0.00</div>
+                    <div class="contador-resumen" id="contadorPlatos">0 platos</div>
+                </div>
+            </div>
+
+            <!-- DESGLOSE POR METODO -->
+            <div class="desglose-pagos">
+                <h3>Desglose por Método de Pago</h3>
+                <div class="tabla-desglose">
+                    <div class="fila-desglose encabezado">
+                        <div class="col-metodo">Método</div>
+                        <div class="col-cantidad">Cantidad</div>
+                        <div class="col-monto">Monto</div>
+                        <div class="col-porcentaje">%</div>
+                    </div>
+                    <div id="desgloseMetodos" class="filas-desglose">
+                        <!-- Renderizado por JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLATOS MAS VENDIDOS -->
+            <div class="platos-vendidos">
+                <h3>Top 5 Platos Más Vendidos</h3>
+                <div id="topPlatos" class="lista-top">
+                    <!-- Renderizado por JS -->
+                </div>
+            </div>
+
+            <div class="acciones-caja">
+                <button id="btnCerrarCaja" class="btn btn-primario">🔐 Cerrar Caja del Día</button>
+            </div>
+        </section>
+
+        <!-- TAB: BOLETAS -->
+        <section id="tab-boletas" class="tab-contenido">
+            <div class="seccion-titulo">
+                <h2>Boletas</h2>
+            </div>
+
+            <!-- OPCIONES BOLETAS -->
+            <div class="opciones-boletas">
+                <button id="btnGenerarBoleta" class="btn btn-primario">📄 Generar Boleta</button>
+                <input type="text" id="buscarBoleta" placeholder="Buscar por número..." class="input-buscar">
+                <select id="filtroFechaBoleta" class="select-filtro">
+                    <option value="">Todos</option>
+                    <option value="hoy">Hoy</option>
+                    <option value="semana">Última semana</option>
+                    <option value="mes">Este mes</option>
+                </select>
+            </div>
+
+            <!-- LISTA BOLETAS -->
+            <div id="listaBoletas" class="tabla-boletas">
+                <div class="tabla-encabezado">
+                    <div class="col-numero">Número</div>
+                    <div class="col-fecha">Fecha</div>
+                    <div class="col-cliente">Cliente</div>
+                    <div class="col-monto">Monto</div>
+                    <div class="col-estado">Estado</div>
+                    <div class="col-acciones">Acciones</div>
+                </div>
+                <div id="filasBoletasBody" class="tabla-body">
+                    <!-- Renderizado por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: USUARIOS -->
+        <section id="tab-usuarios" class="tab-contenido">
+            <div class="seccion-titulo">
+                <h2>Gestión de Usuarios</h2>
+            </div>
+
+            <!-- FORMULARIO NUEVO USUARIO -->
+            <div class="formulario-usuario">
+                <h3>Crear Nuevo Usuario</h3>
+                <form id="formNuevoUsuario" class="form-usuario">
+                    <div class="grupo-campos">
+                        <input type="text" id="nuevoNombre" placeholder="Nombre completo" required>
+                        <input type="email" id="nuevoEmail" placeholder="Email" required>
+                    </div>
+                    <div class="grupo-campos">
+                        <input type="password" id="nuevoPassword" placeholder="Contraseña" required>
+                        <select id="nuevoRol" required>
+                            <option value="">Seleccionar rol</option>
+                            <option value="admin">👨‍💼 Administrador</option>
+                            <option value="cocinero">👨‍🍳 Cocinero</option>
+                            <option value="caja">💰 Caja</option>
+                            <option value="mesero">🍽️ Mesero</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primario">➕ Crear Usuario</button>
+                </form>
+            </div>
+
+            <!-- LISTA DE USUARIOS -->
+            <div class="lista-usuarios">
+                <h3>Usuarios Registrados</h3>
+                <div id="filasUsuarios" class="tabla-usuarios">
+                    <!-- Renderizado por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: AUDITORIA -->
+        <section id="tab-auditoria" class="tab-contenido">
+            <div class="seccion-titulo">
+                <h2>Registro de Auditoría</h2>
+            </div>
+
+            <!-- FILTROS AUDITORIA -->
+            <div class="filtros-auditoria">
+                <select id="filtroUsuarioAudit" class="select-filtro">
+                    <option value="">Todos los usuarios</option>
+                </select>
+
+                <input type="date" id="filtroFechaAudit" class="input-fecha">
+
+                <select id="filtroAccionAudit" class="select-filtro">
+                    <option value="">Todas las acciones</option>
+                    <option value="crear">Crear</option>
+                    <option value="editar">Editar</option>
+                    <option value="eliminar">Eliminar</option>
+                    <option value="cerrar_caja">Cerrar Caja</option>
+                    <option value="generar_boleta">Generar Boleta</option>
+                </select>
+
+                <button id="btnRefreshAudit" class="btn btn-secundario">🔄 Actualizar</button>
+            </div>
+
+            <!-- LOG DE AUDITORIA -->
+            <div id="logAuditoria" class="log-auditoria">
+                <!-- Renderizado por JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <p>&copy; 2026 SisTacna - Sistema de Gestión Restaurantes</p>
+    </footer>
+
+    <!-- MODAL: DETALLE COMANDA -->
+    <div id="modalComanda" class="modal">
+        <div class="modal-contenido modal-grande">
+            <button class="btn-cerrar" id="btnCerrarModalComanda">&times;</button>
+            <h2>Detalles de Comanda</h2>
+            <div id="detalleComanda">
+                <!-- Renderizado por JS -->
+            </div>
+            <div class="acciones-modal">
+                <select id="nuevoEstado" class="select-estado">
+                    <option value="pendiente">🕐 Pendiente</option>
+                    <option value="preparacion">👨‍🍳 En Preparación</option>
+                    <option value="listo">✅ Listo</option>
+                    <option value="entregado">🎉 Entregado</option>
+                </select>
+                <button id="btnActualizarComanda" class="btn btn-primario">Actualizar Estado</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: VER BOLETA -->
+    <div id="modalBoleta" class="modal">
+        <div class="modal-contenido modal-grande">
+            <button class="btn-cerrar" id="btnCerrarModalBoleta">&times;</button>
+            <h2>Boleta</h2>
+            <div id="detalleBoletaModal">
+                <!-- Renderizado por JS -->
+            </div>
+            <div class="acciones-modal">
+                <button id="btnImprimirBoleta" class="btn btn-primario">🖨️ Imprimir</button>
+                <button id="btnDescargarBoleta" class="btn btn-secundario">📥 Descargar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/js/admin.js"></script>
+</body>
+</html>
