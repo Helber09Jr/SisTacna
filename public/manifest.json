@@ -1,0 +1,78 @@
+{
+  "name": "SISTACNA - Gestión de Restaurantes",
+  "short_name": "SISTACNA",
+  "description": "Sistema completo de gestión para restaurantes. Menú digital, comandas, caja e informes.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#ff6b35",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/assets/iconos-app/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/iconos-app/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/imagenes/screenshots/home.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/imagenes/screenshots/carta.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Menú Digital",
+      "short_name": "Menú",
+      "description": "Abrir menú digital",
+      "url": "/carta.html",
+      "icons": [
+        {
+          "src": "/assets/iconos-app/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Panel Admin",
+      "short_name": "Admin",
+      "description": "Acceder a administración",
+      "url": "/admin.html",
+      "icons": [
+        {
+          "src": "/assets/iconos-app/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

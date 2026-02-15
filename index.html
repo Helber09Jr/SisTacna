@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SISTACNA - Sistema de gestión para restaurantes">
+  <meta name="theme-color" content="#ff6b35">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/imagenes/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/utils.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <title>SISTACNA - Gestión para Restaurantes</title>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="encabezado">
+    <div class="contenedor">
+      <div class="logo">
+        <h1>SISTACNA</h1>
+      </div>
+      <nav class="nav">
+        <button class="nav-toggle" aria-label="Menú">☰</button>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-enlace">Inicio</a></li>
+          <li><a href="#sobre" class="nav-enlace">Sobre</a></li>
+          <li><a href="#contacto" class="nav-enlace">Contacto</a></li>
+          <li><a href="/carta.html" class="nav-enlace">Menú</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-contenido">
+      <h2>Bienvenido a SISTACNA</h2>
+      <p>La solución completa para tu restaurante</p>
+      <a href="/carta.html" class="btn btn-primario">Ver Menú Digital</a>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="contenedor">
+      <h2>¿Por qué SISTACNA?</h2>
+      <div class="caracteristicas">
+        <div class="tarjeta">
+          <h3>⚡ Rápido</h3>
+          <p>Implementación sin complicaciones. Soporte completo.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>🔒 Seguro</h3>
+          <p>Datos encriptados. Backups automáticos.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>📱 Moderno</h3>
+          <p>Funciona en móvil, tablet y desktop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="contenedor">
+      <h2>Contacto</h2>
+      <p>📞 +51 1 2345678 | 📧 contacto@sistacna.com</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pie">
+    <p>&copy; 2026 SISTACNA. Todos los derechos reservados.</p>
+  </footer>
+
+  <script type="module" src="/js/index.js"></script>
+</body>
+</html>
