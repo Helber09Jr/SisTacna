@@ -67,45 +67,36 @@ export const Almacenamiento = {
 
 export const Notificaciones = {
   mostrar: (tipo = 'info', mensaje = '', duracion = 3000) => {
-    const container = document.getElementById('toast-container') || (() => {
+    const contenedor = document.getElementById('contenedor-notificaciones') || (() => {
       const div = document.createElement('div');
-      div.id = 'toast-container';
-      div.style.cssText = 'position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;';
+      div.id = 'contenedor-notificaciones';
       document.body.appendChild(div);
       return div;
     })();
 
-    const toast = document.createElement('div');
-    const colores = {
-      success: '#28a745',
-      error: '#dc3545',
-      warning: '#ffc107',
-      info: '#17a2b8',
+    const notif = document.createElement('div');
+    const clases = {
+      exito: 'notificacion-exito',
+      error: 'notificacion-error',
+      advertencia: 'notificacion-advertencia',
+      info: 'notificacion-info',
     };
 
-    toast.style.cssText = `
-      background-color: ${colores[tipo] || colores.info};
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      min-width: 300px;
-      animation: slideInRight 0.3s ease;
-    `;
-    toast.textContent = mensaje;
+    notif.className = `notificacion ${clases[tipo] || clases.info}`;
+    notif.textContent = mensaje;
 
-    container.appendChild(toast);
+    contenedor.appendChild(notif);
 
     if (duracion > 0) {
-      setTimeout(() => toast.remove(), duracion);
+      setTimeout(() => notif.remove(), duracion);
     }
 
-    return toast;
+    return notif;
   },
-  exito: (msg) => Notificaciones.mostrar('success', msg, 3000),
+  exito: (msg) => Notificaciones.mostrar('exito', msg, 3000),
   error: (msg) => Notificaciones.mostrar('error', msg, 5000),
   info: (msg) => Notificaciones.mostrar('info', msg, 3000),
-  advertencia: (msg) => Notificaciones.mostrar('warning', msg, 4000),
+  advertencia: (msg) => Notificaciones.mostrar('advertencia', msg, 4000),
 };
 
 // ==================== DOM ====================
@@ -113,6 +104,12 @@ export const Notificaciones = {
 export const DOM = {
   q: (selector) => document.querySelector(selector),
   qa: (selector) => document.querySelectorAll(selector),
+  crearElemento: (tag, clases = '', html = '') => {
+    const el = document.createElement(tag);
+    if (clases) el.className = clases;
+    if (html) el.innerHTML = html;
+    return el;
+  },
   on: (selector, event, callback) => {
     document.addEventListener(event, (e) => {
       if (e.target.matches(selector)) {
@@ -128,33 +125,33 @@ export const DOM = {
     const el = DOM.q(selector);
     if (el) el.textContent = text;
   },
-  addClass: (selector, clase) => DOM.q(selector)?.classList.add(clase),
-  removeClass: (selector, clase) => DOM.q(selector)?.classList.remove(clase),
-  toggleClass: (selector, clase) => DOM.q(selector)?.classList.toggle(clase),
-  show: (selector) => DOM.q(selector) && (DOM.q(selector).style.display = 'block'),
-  hide: (selector) => DOM.q(selector) && (DOM.q(selector).style.display = 'none'),
+  agregarClase: (selector, clase) => DOM.q(selector)?.classList.add(clase),
+  quitarClase: (selector, clase) => DOM.q(selector)?.classList.remove(clase),
+  toggleClase: (selector, clase) => DOM.q(selector)?.classList.toggle(clase),
+  mostrar: (selector) => DOM.q(selector) && (DOM.q(selector).style.display = 'block'),
+  ocultar: (selector) => DOM.q(selector) && (DOM.q(selector).style.display = 'none'),
 };
 
 // ==================== UTILIDADES ====================
 
 export const Utils = {
-  scrollTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
-  scrollTo: (selector, offset = 0) => {
+  alInicio: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+  desplazarA: (selector, offset = 0) => {
     const el = DOM.q(selector);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   },
-  debounce: (func, wait = 300) => {
+  debounce: (func, espera = 300) => {
     let timeout;
     return function (...args) {
       clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
+      timeout = setTimeout(() => func.apply(this, args), espera);
     };
   },
   uuid: () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     const r = Math.random() * 16 | 0;
     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
   }),
-  sleep: (ms = 1000) => new Promise(resolve => setTimeout(resolve, ms)),
+  esperar: (ms = 1000) => new Promise(resolve => setTimeout(resolve, ms)),
 };
 
 // ==================== INICIALIZACIONES ====================
@@ -166,60 +163,6 @@ export function registrarServiceWorker() {
     }).catch(err => {
       console.warn('⚠️ Error SW:', err);
     });
-  }
-}
-
-export function agregarEstilosGlobales() {
-  if (!document.getElementById('estilos-globales')) {
-    const style = document.createElement('style');
-    style.id = 'estilos-globales';
-    style.textContent = `
-      :root {
-        --color-primary: #ff6b35;
-        --color-white: #ffffff;
-        --color-gray-100: #f8f9fa;
-        --color-gray-500: #6c757d;
-        --color-gray-700: #343a40;
-        --color-success: #28a745;
-        --color-danger: #dc3545;
-        --color-warning: #ffc107;
-        --transition: 0.3s ease;
-      }
-
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: 'Poppins', sans-serif; color: var(--color-gray-700); }
-
-      .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: var(--transition);
-      }
-
-      .btn-primary {
-        background-color: var(--color-primary);
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background-color: #e55a2a;
-        transform: translateY(-2px);
-      }
-
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-    `;
-    document.head.appendChild(style);
   }
 }
 

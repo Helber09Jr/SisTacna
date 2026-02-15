@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Menú Digital - SISTACNA">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/utils.css">
+  <link rel="stylesheet" href="/css/carta.css">
+  <title>Menú Digital - SISTACNA</title>
+</head>
+<body>
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <div class="contenedor">
+      <a href="/index.html" class="logo-regreso">← Atrás</a>
+      <h1>Menú Digital</h1>
+      <button class="btn-carrito" id="btnCarrito">🛒 <span id="cantCarrito">0</span></button>
+    </div>
+  </header>
+
+  <!-- FILTROS -->
+  <section class="filtros">
+    <div class="contenedor">
+      <input type="text" id="searchBox" class="buscador" placeholder="Buscar plato...">
+      <div class="categorias">
+        <button class="btn-categoria activo" data-cat="todos">Todos</button>
+        <button class="btn-categoria" data-cat="ceviche">Ceviches</button>
+        <button class="btn-categoria" data-cat="bebidas">Bebidas</button>
+        <button class="btn-categoria" data-cat="postres">Postres</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATOS -->
+  <main class="principal">
+    <div class="contenedor">
+      <div class="grid-platos" id="gridPlatos">
+        <!-- Se llenarán dinámicamente -->
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL PLATO -->
+  <div class="modal" id="modalPlato">
+    <div class="modal-contenido">
+      <button class="modal-cerrar">✕</button>
+      <img src="" alt="" id="imgPlato" class="img-plato">
+      <h2 id="nombrePlato"></h2>
+      <p id="descPlato"></p>
+      <p id="precioPlato"></p>
+      <div class="control-cantidad">
+        <button id="btnMenos">−</button>
+        <input type="number" id="inputCantidad" value="1" min="1">
+        <button id="btnMas">+</button>
+      </div>
+      <button class="btn btn-primario btn-bloque" id="btnAgregarCarrito">Agregar al Carrito</button>
+    </div>
+  </div>
+
+  <!-- MODAL CARRITO -->
+  <div class="modal" id="modalCarrito">
+    <div class="modal-contenido">
+      <button class="modal-cerrar">✕</button>
+      <h2>Tu Carrito</h2>
+      <div class="items-carrito" id="itemsCarrito">
+        <!-- Se llenarán dinámicamente -->
+      </div>
+      <div class="total-carrito">
+        <p>Total: <strong id="totalCarrito">S/. 0.00</strong></p>
+      </div>
+      <button class="btn btn-primario btn-bloque" id="btnPedir">Realizar Pedido</button>
+    </div>
+  </div>
+
+  <script type="module" src="/js/carta.js"></script>
+</body>
+</html>

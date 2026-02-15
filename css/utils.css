@@ -1,0 +1,246 @@
+/* ============================================================================
+   UTILS.CSS - Estilos globales y comunes
+   ============================================================================ */
+
+:root {
+  --color-primario: #ff6b35;
+  --color-primario-oscuro: #e55a2a;
+  --color-secundario: #004e89;
+  --color-blanco: #ffffff;
+  --color-gris-100: #f8f9fa;
+  --color-gris-300: #dee2e6;
+  --color-gris-500: #6c757d;
+  --color-gris-700: #343a40;
+  --color-negro: #1a1a1a;
+  --color-exito: #28a745;
+  --color-error: #dc3545;
+  --color-advertencia: #ffc107;
+  --transicion: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-gris-700);
+  background-color: var(--color-blanco);
+}
+
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==================== BOTONES ==================== */
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transicion);
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primario {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.btn-primario:hover {
+  background-color: var(--color-primario-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  border: 2px solid var(--color-primario);
+  color: var(--color-primario);
+}
+
+.btn-secundario:hover {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.btn-bloque {
+  width: 100%;
+  display: block;
+}
+
+/* ==================== NOTIFICACIONES ==================== */
+
+#contenedor-notificaciones {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notificacion {
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: deslizarDerecha 0.3s ease;
+  min-width: 300px;
+}
+
+.notificacion-exito {
+  background-color: var(--color-exito);
+}
+
+.notificacion-error {
+  background-color: var(--color-error);
+}
+
+.notificacion-info {
+  background-color: #17a2b8;
+}
+
+.notificacion-advertencia {
+  background-color: var(--color-advertencia);
+  color: var(--color-negro);
+}
+
+/* ==================== TARJETAS ==================== */
+
+.tarjeta {
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all var(--transicion);
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ==================== MODAL ==================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  animation: aparecer 0.3s ease;
+}
+
+.modal.activo {
+  display: flex;
+}
+
+.modal-contenido {
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: subirRapido 0.3s ease;
+}
+
+.modal-cerrar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-gris-500);
+  transition: color var(--transicion);
+}
+
+.modal-cerrar:hover {
+  color: var(--color-negro);
+}
+
+/* ==================== ANIMACIONES ==================== */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes deslizarDerecha {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subirRapido {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bajarLento {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .modal-contenido {
+    width: 95%;
+    padding: 20px;
+  }
+
+  #contenedor-notificaciones {
+    right: 10px;
+    left: 10px;
+  }
+
+  .notificacion {
+    min-width: auto;
+  }
+}
