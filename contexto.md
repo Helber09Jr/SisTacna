@@ -6,7 +6,8 @@ Sistema web completo de gestion para restaurantes. Aplicacion web progresiva (PW
 - Pagina publica con informacion del restaurante
 - Menu digital interactivo con carrito de pedidos
 - Panel de administracion con roles (admin, mozo, cajero)
-- Sistema de comandas en tiempo real
+- Sistema de comandas en tiempo real con impresoras por zona
+- Generacion automatica de tickets en zona de cocina (sin acceso al sistema para chef)
 - Generacion de boletas y control de caja
 - Integracion con Firebase (Firestore + Authentication)
 
@@ -557,8 +558,10 @@ Panel completo de gestion del restaurante. Maneja comandas, caja, carta, usuario
       UID de Firebase
       Email
       Nombre completo
-      Rol (select): Super Admin, Administrador, Mozo, Cajero, Cocina
+      Rol (select): Super Admin, Administrador, Mozo, Cajero
       Botones: Cancelar, Crear
+
+      NOTA: Chef NO requiere acceso al sistema (recibe tickets impresos por zona)
 
   </section>
 ```
@@ -699,9 +702,10 @@ Roles definidos:
     Caja: generar boletas, cierre de caja
     Carta: solo leer
 
-  cocina:
-    Comandas: leer pendientes, cambiar estado (pendiente -> preparando -> listo)
-    Carta: solo leer
+  (CHEF NO TIENE ACCESO AL SISTEMA)
+    Recibe: Tickets impresos por zona automaticamente
+    Accion: Lee comandas en papel, prepara segun especificaciones
+    Retorno: Avisa cuando plato esta listo (verbal o timbre)
 
 Funciones:
 
@@ -745,6 +749,8 @@ Funciones:
   numComanda: 1,
   mesa: "Mesa 5",
   mozo: "Carlos",
+  zona: "cocina",              // NUEVO: cocina, bebidas, panaderia, etc
+  impresaEn: "2026-02-13T14:30:45Z",  // NUEVO: timestamp de impresion
   items: [
     {
       platoId: "ceviche-clasico",
@@ -760,7 +766,6 @@ Funciones:
   estado: "pendiente",
   fechaCreacion: Timestamp,
   creadoPor: "uid_mozo",
-  fechaPreparacion: Timestamp,
   fechaListo: Timestamp,
   fechaEntrega: Timestamp,
   boletaId: null
@@ -877,28 +882,35 @@ carta.html -> plato renderizado
   -> toast de confirmacion
 ```
 
-### Flujo 2: Cocina recibe y prepara comanda
+### Flujo 2: Cocina recibe y prepara comanda (sin acceso al sistema)
 
 ```
-admin.html -> Tab Comandas (rol: cocina)
-  -> listener onSnapshot detecta nueva comanda
-  -> tarjeta aparece en columna "Pendientes"
-  -> cocinero click "Preparar"
-  -> estado cambia a 'preparando'
-  -> tarjeta se mueve a columna "En Preparacion"
-  -> cuando termina, click "Listo"
-  -> estado cambia a 'listo'
-  -> tarjeta se mueve a columna "Listos"
+Cuando mozo crea comanda en admin.html:
+  -> Sistema detecta nueva comanda
+  -> Imprime ticket automaticamente en IMPRESORA DE ZONA del chef
+  -> Chef recibe ticket en papel con detalles:
+     * Numero de comanda
+     * Items con cantidad y especificaciones
+     * Observaciones especiales
+  -> Chef prepara segun ticket impreso
+  -> Cuando esta listo, avisa (verbal, timbre, o grita numero)
+  -> Mozo actualiza estado en admin.html a "Listo"
+
+NOTA: Chef NO tiene usuario en el sistema, SOLO recibe tickets impresos
 ```
 
-### Flujo 3: Mozo entrega pedido
+### Flujo 3: Mozo marca como listo y entrega pedido
 
 ```
-admin.html -> Tab Comandas (rol: mozo)
-  -> ve comandas con estado 'listo'
-  -> click "Entregar"
-  -> estado cambia a 'entregado'
-  -> comanda queda disponible para cobro
+Cuando chef avisa que comanda esta lista:
+  -> Mozo ve en admin.html comandas pendientes
+  -> Chef avisa verbalmente o por timbre que plato esta listo
+  -> Mozo click "Listo" en comanda
+  -> Estado cambia a 'listo' (visible solo para mozo, no en cocina)
+  -> Mozo retira el plato y lo lleva a la mesa
+  -> Mozo click "Entregar"
+  -> Estado cambia a 'entregado'
+  -> Comanda queda disponible para cobro
 ```
 
 ### Flujo 4: Cajero genera boleta
@@ -942,6 +954,48 @@ admin.html -> pantalla login
   -> registra acceso en auditoria
   -> muestra panel con tabs segun permisos
   -> inicializa listeners en tiempo real
+```
+
+### Sistema de Impresoras por Zona (Cocina)
+
+```
+ARQUITECTURA:
+  Mozo crea comanda en admin.html
+    ↓
+  Firebase registra comanda con zona: "cocina" o "zona_bebidas"
+    ↓
+  Cloud Function detecta comanda nueva
+    ↓
+  Envia comando a impresora termica en la zona (via API o servidor local)
+    ↓
+  Impresora imprime ticket con:
+    - Numero de comanda
+    - Items (cantidad + especificaciones)
+    - Observaciones
+    - Hora de creacion
+    - Mesa/Cliente
+    ↓
+  Chef recibe papel y comienza a preparar
+
+CONFIGURACION:
+  - Impresora por zona (ej: Cocina, Bebidas, Panaderia)
+  - IP/Puerto de impresora configurado en Firebase
+  - Reintento automatico si falla impresion
+  - Registro de impresiones exitosas en auditoria
+
+FORMATO DE TICKET (Ejemplo):
+  ═══════════════════════════════════
+  COMANDA #001           [13:45:20]
+  Mesa: 5  | Mozo: Carlos
+  ═══════════════════════════════════
+  2x Ceviche Clasico
+     → Sin cebolla extra
+  1x Causa Limeña
+     → Con aguacate
+
+  OBSERVACIONES:
+  Cliente alergico a mariscos
+  ═══════════════════════════════════
 ```
 
 ---

@@ -14,9 +14,10 @@
 
 ✅ **Página pública** - Landing profesional
 ✅ **Menú digital** - Carta interactiva + carrito
-✅ **Comandas** - Gestión en tiempo real
+✅ **Comandas** - Gestión en tiempo real con impresoras por zona
+✅ **Impresión automática** - Tickets al chef sin acceso al sistema
 ✅ **Caja** - Boletas automáticas
-✅ **Admin** - Panel de control multi-rol
+✅ **Admin** - Panel de control multi-rol (Admin, Mozo, Cajero)
 ✅ **Auditoria** - Registro de todas las acciones
 
 **Impacto esperado**: +40% ingresos, -30% costos operacionales

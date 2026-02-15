@@ -139,7 +139,8 @@ Día 5-7: CARTA           ├─ Carta                   ├─ QA
 - Combos y promociones
 
 ✅ **Control de Acceso**
-- 5 roles: Super Admin, Admin, Mozo, Cajero, Cocina
+- 4 roles: Super Admin, Admin, Mozo, Cajero
+- Chef recibe tickets impresos (sin acceso al sistema)
 - Permisos granulares por rol
 - Auditoria completa de acciones
 - Historial de cambios
@@ -328,11 +329,13 @@ Otras 17 mejoras detalladas en `MEJORAS_PROPUESTAS.md`
 │ MOZO                        CAJERO                         │
 │ ├─ Crear comandas          ├─ Generar boletas            │
 │ ├─ Cambiar estado          ├─ Cierre caja                │
-│ └─ Ver disponibilidad       └─ Reporte diario             │
+│ ├─ Ver disponibilidad       └─ Reporte diario             │
+│ └─ Marcar como Listo                                       │
 │                                                             │
-│ COCINA                                                      │
-│ ├─ Ver pendientes                                         │
-│ └─ Cambiar estado (Preparando → Listo)                   │
+│ CHEF (SIN SISTEMA)                                         │
+│ └─ Recibe: Tickets impresos en zona (Cocina/Bebidas)     │
+│    Prepara: Según especificaciones del ticket            │
+│    Avisa: Verbalmente cuando esta listo                  │
 │                                                             │
 └────────────────────────────────────────────────────────────┘
 ```
