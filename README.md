@@ -124,6 +124,53 @@ Semana 3: Auditoria (1) + Optim (2) + Testing (1) + Deploy (2)
 
 ---
 
+## 🗂️ ESTRUCTURA DEL PROYECTO (ACTUALIZADA)
+
+```
+sistacna/
+├── 📄 HTML (En raíz)
+│   ├── index.html           ✅ HOME/Landing
+│   ├── carta.html           ✅ MENÚ DIGITAL
+│   ├── carrito.html         ⏳ (Próximo)
+│   └── admin.html           ⏳ (Próximo)
+│
+├── 🎨 css/                  (Estilos)
+│   ├── utils.css            ✅ Estilos globales compartidos
+│   ├── index.css            ✅ Estilos HOME
+│   ├── carta.css            ✅ Estilos MENÚ
+│   ├── carrito.css          ⏳ Estilos CARRITO
+│   └── admin.css            ⏳ Estilos ADMIN
+│
+├── 📜 js/                   (Scripts)
+│   ├── utils.js             ✅ Funciones compartidas (validaciones, formatos, DOM)
+│   ├── firebase-config.js   ✅ Config Firebase centralizada
+│   ├── index.js             ✅ Lógica HOME
+│   ├── carta.js             ✅ Lógica MENÚ (búsqueda, filtros, carrito)
+│   ├── carrito.js           ⏳ Lógica CARRITO
+│   └── admin.js             ⏳ Lógica ADMIN
+│
+├── 💾 data/                 (Datos JSON)
+│   └── platos.json          (Información de platos)
+│
+├── 🖼️ imagenes/             (Fotos y assets)
+│   ├── platos/
+│   ├── logos/
+│   └── iconos/
+│
+├── 🔧 PWA
+│   ├── manifest.json        ✅ Configuración PWA
+│   └── sw.js                ✅ Service Worker
+│
+└── 📚 Documentación
+    ├── README.md            (Este archivo)
+    ├── INICIO_RAPIDO.md
+    ├── RESUMEN_EJECUTIVO.md
+    ├── ESTRUCTURA_PROYECTO.md
+    └── ... (otros docs)
+```
+
+---
+
 ## 🚀 PRIMEROS PASOS (HOY)
 
 ### 1. Lee (30 min)
@@ -133,24 +180,38 @@ Semana 3: Auditoria (1) + Optim (2) + Testing (1) + Deploy (2)
 3. ESTRUCTURA_PROYECTO.md (13 min)
 ```
 
-### 2. Crea Carpetas (15 min)
-```bash
-mkdir -p public src/{css,js,data} assets/{imagenes,fuentes}
-mkdir -p src/css/{home,carta,admin}
-mkdir -p src/js/{utils,home,carta,admin}
+### 2. Estructura Lista ✅
+La estructura de carpetas ya está creada y optimizada:
+```
+✅ HTML en raíz (index.html, carta.html, etc)
+✅ css/ con todos los estilos
+✅ js/ con toda la lógica
+✅ data/ para datos JSON
+✅ imagenes/ para assets
 ```
 
-### 3. Configura Firebase (30 min)
+### 3. Módulos Completados ✅
+```
+✅ HOME: index.html + index.css + index.js
+✅ MENÚ: carta.html + carta.css + carta.js
+   - Grid responsivo de platos
+   - Búsqueda y filtros
+   - Modal de plato
+   - Carrito persistente en localStorage
+```
+
+### 4. Configura Firebase (30 min)
 ```
 1. Crear proyecto en Firebase Console
 2. Obtener credenciales
 3. Crear colecciones en Firestore
-4. Crear firebase-config.js
+4. Actualizar js/firebase-config.js con tus credenciales
 ```
 
-### 4. Empieza Desarrollo
+### 5. Empieza Desarrollo
 ```bash
-# Sigue: CHECKLIST_DIARIO.md - Día 1
+# Próximos módulos: carrito.html y admin.html
+# Sigue: CHECKLIST_DIARIO.md
 ```
 
 ---
