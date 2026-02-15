@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SISTACNA - Sistema completo de gestión para restaurantes. Menú digital, comandas, caja e informes.">
+  <meta name="theme-color" content="#ff6b35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SISTACNA">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/iconos-app/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/assets/iconos-app/icon-192x192.png">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="/src/css/variables.css">
+  <link rel="stylesheet" href="/src/css/reset.css">
+  <link rel="stylesheet" href="/src/css/base.css">
+  <link rel="stylesheet" href="/src/css/responsive.css">
+  <link rel="stylesheet" href="/src/css/animaciones.css">
+  <link rel="stylesheet" href="/src/css/home/header.css">
+  <link rel="stylesheet" href="/src/css/home/hero.css">
+  <link rel="stylesheet" href="/src/css/home/seccion-nosotros.css">
+  <link rel="stylesheet" href="/src/css/home/galeria.css">
+  <link rel="stylesheet" href="/src/css/home/footer.css">
+
+  <title>SISTACNA - Gestión Integral para Restaurantes</title>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-content container">
+      <a href="#home" class="logo">
+        <img src="/assets/imagenes/logo.png" alt="SISTACNA Logo">
+        <span class="logo-text">
+          <span class="logo-text-principal">SISTACNA</span>
+          <span class="logo-text-sub">Gestión de Restaurantes</span>
+        </span>
+      </a>
+
+      <!-- Navegación Desktop -->
+      <nav class="nav-horizontal">
+        <a href="#home" class="active">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <!-- Acciones del Header -->
+      <div class="header-actions">
+        <button type="button" class="hamburger-toggle" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="/carta.html" class="btn btn-primary" style="display: inline-block;">Ver Menú</a>
+      </div>
+    </div>
+
+    <!-- Menú Móvil -->
+    <nav class="nav-mobile">
+      <a href="#home">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+      <a href="/carta.html">Menú Digital</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-parallax"></div>
+    <div class="hero-content">
+      <h1>Bienvenido a SISTACNA</h1>
+      <p>Sistema completo de gestión para restaurantes. Menú digital, comandas en tiempo real, caja integrada e informes inteligentes.</p>
+      <div class="hero-buttons">
+        <a href="/carta.html" class="btn btn-primary" data-target="#galeria">Ver Menú</a>
+        <button type="button" class="btn btn-secondary" data-target="#nosotros">Conoce Más</button>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SECCIÓN NOSOTROS -->
+  <section class="seccion-nosotros" id="nosotros">
+    <div class="seccion-nosotros-contenedor">
+      <div class="seccion-titulo">
+        <h2>Sobre SISTACNA</h2>
+        <p>La solución tecnológica que tu restaurante necesita para crecer</p>
+      </div>
+
+      <div class="nosotros-grid">
+        <div class="nosotros-imagen">
+          <img src="/assets/imagenes/hero/hero-home.webp" alt="Restaurante">
+        </div>
+        <div class="nosotros-contenido">
+          <h3>¿Por qué elegir SISTACNA?</h3>
+          <p>
+            SISTACNA es un sistema integral diseñado específicamente para restaurantes modernos.
+            Integra el menú digital, toma de comandas, gestión de caja y análisis de datos en una
+            única plataforma fácil de usar.
+          </p>
+          <p>
+            Nuestro objetivo es ayudarte a optimizar operaciones, reducir errores y aumentar ingresos.
+            Con SISTACNA, tu restaurante ingresa al mundo digital sin complicaciones.
+          </p>
+        </div>
+      </div>
+
+      <!-- Valores -->
+      <div class="valores-grid">
+        <div class="valor-card">
+          <span class="valor-icon">⚡</span>
+          <h4>Rápido</h4>
+          <p>Implementación en días, no meses. Soporte durante todo el proceso.</p>
+        </div>
+        <div class="valor-card">
+          <span class="valor-icon">🔒</span>
+          <h4>Seguro</h4>
+          <p>Datos encriptados en Firebase. Backups automáticos y auditoria completa.</p>
+        </div>
+        <div class="valor-card">
+          <span class="valor-icon">📱</span>
+          <h4>Intuitivo</h4>
+          <p>Interfaz moderna y fácil de usar. Capacitación incluida para tu personal.</p>
+        </div>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="estadisticas">
+        <h3 style="color: white; margin-top: 0;">Resultados Comprobados</h3>
+        <div class="estadisticas-grid">
+          <div class="estadistica-item">
+            <div class="estadistica-numero">+40%</div>
+            <div class="estadistica-label">Aumento de Ingresos</div>
+          </div>
+          <div class="estadistica-item">
+            <div class="estadistica-numero">-30%</div>
+            <div class="estadistica-label">Reducción de Costos</div>
+          </div>
+          <div class="estadistica-item">
+            <div class="estadistica-numero">-83%</div>
+            <div class="estadistica-label">Menos Errores</div>
+          </div>
+          <div class="estadistica-item">
+            <div class="estadistica-numero">+37%</div>
+            <div class="estadistica-label">Más Mesas/Día</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section class="seccion-galeria" id="galeria">
+    <div class="seccion-titulo">
+      <h2>Galería</h2>
+      <p>Conoce nuestros espacios</p>
+    </div>
+
+    <div class="galeria-grid">
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-1.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-2.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-3.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-4.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-5.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+      <div class="galeria-card">
+        <img src="/assets/imagenes/galeria/ambiente-6.jpg" alt="Ambiente">
+        <div class="galeria-overlay">
+          <div class="galeria-icon">🔍</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL GALERÍA -->
+  <div class="modal-galeria">
+    <div class="modal-contenedor">
+      <img src="" alt="" class="modal-imagen">
+      <div class="modal-controles">
+        <button type="button" class="modal-btn" data-dir="anterior">❮</button>
+        <button type="button" class="modal-btn" data-dir="siguiente">❯</button>
+      </div>
+      <button type="button" class="modal-cerrar">✕</button>
+      <div class="modal-indicadores">1 / 6</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contacto">
+    <div class="footer-contenedor">
+      <div class="footer-grid">
+        <!-- Información -->
+        <div class="footer-seccion">
+          <h4>Información</h4>
+          <div class="footer-info">
+            <div class="info-item">
+              <div class="info-icon">📍</div>
+              <div class="info-contenido">
+                <p>Calle Principal 123<br>Lima, Perú</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">📱</div>
+              <div class="info-contenido">
+                <p><a href="tel:+51123456789">+51 1 2345678</a></p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">✉️</div>
+              <div class="info-contenido">
+                <p><a href="mailto:contacto@sistacna.com">contacto@sistacna.com</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horario -->
+        <div class="footer-seccion">
+          <h4>Horario</h4>
+          <table class="horario-table">
+            <tr>
+              <td>Lunes - Viernes</td>
+              <td class="horario-abierto">11:00 - 23:00</td>
+            </tr>
+            <tr>
+              <td>Sábado</td>
+              <td class="horario-abierto">12:00 - 23:30</td>
+            </tr>
+            <tr>
+              <td>Domingo</td>
+              <td class="horario-abierto">12:00 - 22:00</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Síguenos -->
+        <div class="footer-seccion">
+          <h4>Síguenos</h4>
+          <div class="redes-sociales">
+            <a href="#" class="social-link" title="Facebook">f</a>
+            <a href="#" class="social-link" title="Instagram">📷</a>
+            <a href="#" class="social-link" title="WhatsApp">💬</a>
+            <a href="#" class="social-link" title="TikTok">🎵</a>
+          </div>
+        </div>
+
+        <!-- Contacto rápido -->
+        <div class="footer-seccion">
+          <h4>Contacto Rápido</h4>
+          <form class="footer-form" onsubmit="return false;">
+            <input type="email" placeholder="Tu email" required>
+            <textarea placeholder="Mensaje" rows="3"></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 SISTACNA. Todos los derechos reservados.</p>
+        <div class="footer-links">
+          <a href="#privacy">Privacidad</a>
+          <a href="#terms">Términos</a>
+          <a href="#cookies">Cookies</a>
+        </div>
+        <div class="payment-methods">
+          <div class="payment-icon">💳</div>
+          <div class="payment-icon">📱</div>
+          <div class="payment-icon">💵</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script type="module" src="/src/js/home/inicio.js"></script>
+</body>
+</html>

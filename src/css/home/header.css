@@ -1,0 +1,290 @@
+/* ============================================================================
+   HOME/HEADER.CSS - Barra de navegación y header
+   ============================================================================ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-sm) 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-md);
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   LOGO
+   ───────────────────────────────────────────────────────────────────── */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: var(--line-height-tight);
+}
+
+.logo-text-principal {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.logo-text-sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  font-weight: var(--font-weight-regular);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   NAVEGACIÓN
+   ───────────────────────────────────────────────────────────────────── */
+
+.nav-horizontal {
+  display: none;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .nav-horizontal {
+    display: flex;
+  }
+
+  .header-content {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+}
+
+.nav-horizontal a {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  transition: color var(--transition-fast);
+  position: relative;
+  padding-bottom: var(--spacing-xs);
+}
+
+.nav-horizontal a:hover {
+  color: var(--color-primary);
+}
+
+.nav-horizontal a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-fast);
+}
+
+.nav-horizontal a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-horizontal a.active {
+  color: var(--color-primary);
+}
+
+.nav-horizontal a.active::after {
+  transform: scaleX(1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   HAMBURGER MENU (MÓVIL)
+   ───────────────────────────────────────────────────────────────────── */
+
+.hamburger-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  z-index: var(--z-fixed);
+}
+
+@media (min-width: 768px) {
+  .hamburger-toggle {
+    display: none;
+  }
+}
+
+.hamburger-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-black);
+  transition: all var(--transition-fast);
+  transform-origin: center;
+}
+
+.hamburger-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.hamburger-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   MENÚ MÓVIL
+   ───────────────────────────────────────────────────────────────────── */
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-white);
+  z-index: var(--z-dropdown);
+  animation: slideDown var(--transition-normal);
+}
+
+.nav-mobile.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-mobile a {
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  border-bottom: 1px solid var(--color-gray-200);
+  transition: background-color var(--transition-fast);
+}
+
+.nav-mobile a:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-primary);
+}
+
+.nav-mobile a.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   BOTONES DE ACCIÓN
+   ───────────────────────────────────────────────────────────────────── */
+
+.header-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.btn-carrito {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.btn-carrito:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.carrito-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.btn-login {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-login:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: var(--spacing-sm);
+  }
+
+  .logo-text-principal {
+    font-size: var(--font-size-md);
+  }
+
+  .header-actions {
+    gap: var(--spacing-sm);
+  }
+
+  .btn-login {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+}
