@@ -39,15 +39,27 @@ Satisfacción         7/10       9/10      +28%
 RESULTADO: +40% INGRESOS, -30% COSTOS
 ```
 
-### ⏳ DURACIÓN: 20 DÍAS
+### ⏳ ESTADO ACTUAL: ESTRUCTURA LISTA ✅
 
 ```
-┌──────────────────────────────────────────────────┐
-│ FASE 1: Base (2 días)          ████░░░░░░░░░░  │
-│ FASE 2: Home (2 días)          ████░░░░░░░░░░  │
-│ FASE 3: Carta (3 días)         ██████░░░░░░░░  │
-│ FASE 4: Admin P1 (3 días)      ██████░░░░░░░░  │
-│ FASE 5: Admin P2 (2 días)      ████░░░░░░░░░░  │
+✅ COMPLETADOS (Fase 1-3):
+├── BASE: Estructura simplificada en español
+│   ├── css/utils.css + js/utils.js (Compartido)
+│   └── manifest.json + sw.js (PWA)
+│
+├── HOME: index.html + index.css + index.js
+│   └── Landing, navegación, responsivo
+│
+└── MENÚ: carta.html + carta.css + carta.js
+    ├── Grid responsivo de platos
+    ├── Búsqueda y filtros
+    ├── Modal de plato
+    └── Carrito persistente ✅
+
+⏳ PRÓXIMOS (Fase 4-5):
+├── CARRITO: carrito.html + carrito.css + carrito.js
+└── ADMIN: admin.html + admin.css + admin.js
+```
 │ FASE 6: Admin P3 (2 días)      ████░░░░░░░░░░  │
 │ FASE 7: Auditoria (1 día)      ██░░░░░░░░░░░░  │
 │ FASE 8: Optimiz. (2 días)      ████░░░░░░░░░░  │
