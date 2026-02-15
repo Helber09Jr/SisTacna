@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - SisTacna</title>
+
+    <link rel="stylesheet" href="/css/utils.css">
+    <link rel="stylesheet" href="/css/carrito.css">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="Revisa y procesa tu pedido">
+</head>
+<body>
+    <!-- HEADER NAVEGACION -->
+    <header class="encabezado">
+        <div class="contenedor-encabezado">
+            <a href="/" class="logo">
+                <span class="logo-texto">SisTacna</span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="/" class="nav-enlace">Home</a>
+                <a href="/carta.html" class="nav-enlace">Menú</a>
+                <a href="/carrito.html" class="nav-enlace activo">Carrito</a>
+            </nav>
+
+            <button class="btn-hamburguesa" id="btnMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor-carrito">
+        <section class="seccion-titulo">
+            <h1>Tu Carrito de Pedido</h1>
+            <p id="contadorItems" class="contador">0 productos</p>
+        </section>
+
+        <!-- SI CARRITO VACÍO -->
+        <div id="carritoVacio" class="carrito-vacio">
+            <p>📭 Tu carrito está vacío</p>
+            <p class="subtexto">Explora nuestro menú y agrega tus platos favoritos</p>
+            <a href="/carta.html" class="btn btn-primario">Ir al Menú</a>
+        </div>
+
+        <!-- SI CARRITO TIENE ITEMS -->
+        <div id="carritoConItems" class="carrito-contenedor" style="display: none;">
+            <!-- TABLA DE ITEMS -->
+            <section class="tabla-items">
+                <div class="tabla-encabezado">
+                    <div class="col-plato">Plato</div>
+                    <div class="col-precio">Precio</div>
+                    <div class="col-cantidad">Cantidad</div>
+                    <div class="col-subtotal">Subtotal</div>
+                    <div class="col-acciones">Acción</div>
+                </div>
+
+                <div id="listaItems" class="tabla-items-body">
+                    <!-- Items renderizados por JS -->
+                </div>
+            </section>
+
+            <!-- RESUMEN DE TOTALES -->
+            <section class="resumen-totales">
+                <div class="resumen-contenido">
+                    <div class="fila-total">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">S/. 0.00</span>
+                    </div>
+                    <div class="fila-total">
+                        <span>IGV (18%):</span>
+                        <span id="igv">S/. 0.00</span>
+                    </div>
+                    <div class="fila-total fila-total-principal">
+                        <span>Total:</span>
+                        <span id="total">S/. 0.00</span>
+                    </div>
+
+                    <!-- OPCIONES DE PAGO -->
+                    <div class="opciones-pago">
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo" value="efectivo" checked>
+                            <span>Pagar en efectivo</span>
+                        </label>
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo" value="tarjeta">
+                            <span>Pagar con tarjeta</span>
+                        </label>
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo" value="yape">
+                            <span>Pagar con Yape</span>
+                        </label>
+                    </div>
+
+                    <!-- CAMPO DE OBSERVACIONES -->
+                    <div class="campo-observaciones">
+                        <textarea id="observaciones" placeholder="Observaciones especiales (sin picante, sin cebolla, etc.)"></textarea>
+                    </div>
+
+                    <!-- BOTONES DE ACCION -->
+                    <div class="acciones-carrito">
+                        <button id="btnVaciarCarrito" class="btn btn-secundario btn-peligro">
+                            🗑️ Vaciar Carrito
+                        </button>
+                        <button id="btnProcesar" class="btn btn-primario btn-grande">
+                            ✅ Procesar Pedido
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <p>&copy; 2026 SisTacna - Sistema de Gestión Restaurantes</p>
+    </footer>
+
+    <!-- MODAL DE CONFIRMACION -->
+    <div id="modalConfirmacion" class="modal">
+        <div class="modal-contenido">
+            <button class="btn-cerrar" id="btnCerrarModal">&times;</button>
+            <h2>✅ Pedido Confirmado</h2>
+            <p id="mensajeConfirmacion"></p>
+            <button id="btnNuevoPedido" class="btn btn-primario">Hacer otro pedido</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/js/carrito.js"></script>
+</body>
+</html>
