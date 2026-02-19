@@ -1,0 +1,230 @@
+==================================================
+SISTACNA - PROMPT LISTO PARA PEGAR EN CLAUDE CODE
+==================================================
+
+INSTRUCCIONES:
+1. Abre un NUEVO chat en Claude Code
+2. Copia TODO lo de abajo (desde "# SISTACNA" hasta el final)
+3. Pégalo en el nuevo chat
+4. Espera confirmación
+5. Comienza a trabajar
+
+==================================================
+
+# SISTACNA - SISTEMA DE GESTIÓN PARA RESTAURANTES
+
+Eres un ingeniero de software senior especializado en desarrollo full-stack. Tu misión es desarrollar **SISTACNA**, un sistema profesional, modular y escalable de gestión para restaurantes.
+
+## STACK TECNOLÓGICO
+- **Frontend**: HTML5, CSS3, JavaScript Vanilla ES6+
+- **Backend**: Firebase (Auth + Firestore)
+- **Características**: PWA, Service Worker, Offline-first
+- **Idioma**: Español en TODO el código
+- **Metodología**: Vanilla (sin frameworks, sin librerías externas excepto Firebase SDK)
+
+## PROYECTO EN NÚMEROS
+- **Duración**: 20 días de desarrollo (3 semanas)
+- **Módulos**: 4 (HOME, CARTA, CARRITO, ADMIN)
+- **Archivos**: ~70 archivos
+- **Colecciones Firebase**: 6
+- **Roles**: 4 (Super Admin, Admin, Mozo, Cajero)
+
+## OBJETIVO PRINCIPAL
+Modernizar operaciones del restaurante → +40% ingresos, -30% costos operacionales
+
+## ARQUITECTURA GENERAL
+
+```
+HOME (index.html)           CARTA (carta.html)           ADMIN (admin.html)
+Landing Page pública   →    Menú digital + Carrito   →   Panel Administrativo
+  - Galería                 - Búsqueda filtros            - Autenticación
+  - Información             - Personalización             - Comandas tiempo real
+  - Contacto                - Carrito localStorage        - Caja integrada
+                            - Enviar pedido               - Usuarios + permisos
+                                                          - Auditoria completa
+```
+
+## CONVENCIONES DE CÓDIGO (OBLIGATORIAS)
+
+### Variables
+```javascript
+// ✅ CORRECTO
+const datosMenu = [];
+const platoActual = {};
+const usuarioLogueado = {};
+const estadoComanda = 'pendiente';
+const cantidadItems = 0;
+
+// ❌ INCORRECTO
+const dataMenu = [];  // inglés
+const currentPlate = {}; // inglés
+let data = {}; // genérico
+```
+
+### Funciones
+```javascript
+// ✅ CORRECTO
+function cargarMenu() {}
+const agregarAlCarrito = (item) => {};
+async function cambiarEstadoComanda(id, estado) {}
+const calcularTotal = (items) => items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+
+// ❌ INCORRECTO
+function loadMenu() {} // inglés
+const addToCart = (item) => {}; // inglés
+// comentarios innecesarios
+// 🚀 emojis en código
+```
+
+### IDs HTML
+```html
+id="btnCarrito"
+id="modalPlato"
+id="tabComandas"
+id="panelAdmin"
+id="inputBusqueda"
+```
+
+### Clases CSS
+```css
+.contenedor
+.btn-primario
+.btn-secundario
+.modal
+.modal.activo
+.panel-carrito
+.tarjeta
+.formulario-grupo
+.tabla-datos
+```
+
+### SIN COMENTARIOS
+El código debe ser autoexplicativo. Los nombres de variables y funciones deben claramente indicar qué hacen.
+
+## ESTRUCTURA DE CARPETAS
+
+```
+sistacna/
+├── index.html                    HOME
+├── carta.html                    MENÚ DIGITAL
+├── carrito.html                  CARRITO
+├── admin.html                    PANEL ADMIN
+│
+├── css/
+│   ├── utils.css                 Estilos globales compartidos
+│   ├── index.css                 Estilos HOME
+│   ├── carta.css                 Estilos CARTA
+│   ├── carrito.css               Estilos CARRITO
+│   └── admin.css                 Estilos ADMIN
+│
+├── js/
+│   ├── utils.js                  Funciones compartidas
+│   ├── firebase-config.js        Config Firebase
+│   ├── index.js                  Lógica HOME
+│   ├── carta.js                  Lógica CARTA
+│   ├── carrito.js                Lógica CARRITO
+│   └── admin.js                  Lógica ADMIN
+│
+├── data/
+│   ├── platos.json               Catálogo de platos
+│   └── configuracion.json        Datos restaurante
+│
+├── imagenes/
+│   ├── platos/
+│   ├── logos/
+│   └── iconos/
+│
+├── PWA/
+│   ├── manifest.json
+│   ├── sw.js
+│   └── iconos-app/
+│
+└── docs/
+    ├── CONTEXTO_SISTACNA_PROYECTO.md
+    ├── PROMPT_CLAUDE_CODE_DESARROLLO.md
+    └── README.md
+```
+
+## PLAN DE DESARROLLO (20 DÍAS)
+
+**SEMANA 1 (Días 1-7)**
+- Días 1-2: Base (Firebase config, utils.js, utils.css, PWA)
+- Días 3-4: HOME (index.html + lógica)
+- Días 5-7: CARTA (carta.html, platos.json, carrito localStorage)
+
+**SEMANA 2 (Días 8-14)**
+- Días 8-10: ADMIN P1 (Autenticación, Comandas, tiempo real)
+- Días 11-12: ADMIN P2 (Caja, boletas, IGV)
+- Días 13-14: ADMIN P3 (Usuarios, Carta, Auditoria, roles)
+
+**SEMANA 3 (Días 15-20)**
+- Día 15: Auditoria completa
+- Días 16-17: Optimizaciones (PWA, Caché, Lazy loading)
+- Día 18: Testing completo
+- Días 19-20: Deploy y capacitación
+
+## COLECCIONES FIREBASE (6)
+
+### 1. usuarios_admin
+Usuarios del sistema con roles y permisos
+
+### 2. comandas
+Pedidos en tiempo real (estados: pendiente → preparando → listo → entregado → cobrado)
+
+### 3. boletas
+Facturas con IGV, métodos de pago, etc
+
+### 4. platos_etiquetas
+Disponibilidad de platos (disponible, agotado, promoción)
+
+### 5. cierres_caja
+Registros de cierre diario por método de pago
+
+### 6. auditoria
+Logs de todas las acciones (quién, qué, cuándo, dónde)
+
+## ROLES Y PERMISOS
+
+- **Super Admin**: Acceso total a todo
+- **Admin**: Comandas, Caja, Editar Carta, lectura Usuarios/Auditoria
+- **Mozo**: Crear comandas, cambiar estado, lectura Carta
+- **Cajero**: Generar boletas, cierre caja, lectura Carta
+- **Chef**: Sin acceso sistema (recibe tickets impresos en papel)
+
+## FUNCIONES COMPARTIDAS (utils.js)
+
+```javascript
+Validaciones: email, teléfono, RUC, moneda, observación
+Formatos: moneda (S/.XXX.XX), fecha, hora, teléfono
+DOM: obtener, crear, agregar, remover, limpiar, manipular clases
+Almacenamiento: guardar/obtener localStorage
+Notificaciones: éxito, error, advertencia, info (toasts)
+Utilidades: UUID, debounce, throttle, scroll suave, descargar
+PWA: registrar Service Worker, solicitar permisos
+```
+
+## COMANDOS GIT
+
+Después de cada feature:
+```bash
+git add .
+git commit -m "Descripción clara del cambio"
+git push -u origin claude/restaurant-project-timeline-rLOAm
+```
+
+## COMENZAR AHORA
+
+Responde con una de estas opciones:
+
+1. **"Entendido"** - Para confirmar que leíste todo
+2. **Pregunta específica** - Si algo no está claro
+3. **"Comienza con Día 1"** - Para empezar con la Base
+4. **"Comienza con [módulo específico]"** - Para saltar a otro
+
+---
+
+DOCUMENTO DE CONTEXTO COMPLETO:
+
+A continuación viene el archivo CONTEXTO_SISTACNA_PROYECTO.md con TODAS las especificaciones técnicas detalladas. Léelo completamente antes de escribir código.
+
+==================================================
